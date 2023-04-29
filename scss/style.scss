@@ -1,0 +1,97 @@
+.body {
+  background-color: #DEFFDE;
+
+  .container {
+    margin: 0 auto;
+    max-width: 1000px;
+
+    .header {}
+
+    .header-title {
+      text-align: center;
+      font-size: 32px;
+      color: #40A6A6;
+    }
+
+    .main {
+      margin: 0 auto;
+      
+      .keyboard {
+        margin: 0 auto;
+        max-width: 715px;
+        // width: 100%;
+
+        .keyboard-input {
+          display: block;
+          margin: 0 auto 20px;
+          // text-align: justify;
+          // margin-bottom: 20px;
+          height: 250px;
+          width: 100%;
+          background-color: #DEFFFF;
+          border: 1px solid #40A6A6;
+        }
+
+        .keyboard-keys {
+          display: flex;
+          flex-wrap: wrap;
+          padding: 5px;
+          // justify-content: space-between;
+          // height: 250px;
+          background-color: #DEFFFF;
+          border: 1px solid #40A6A6;
+          font-weight: 800;
+          font-size: 15px;
+
+          .keyboard-row {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            // float: left;
+
+            .key {
+              margin-left: 4px;
+              margin-bottom: 8px;
+              // margin: auto 0;
+              text-align: center;
+              line-height: 40px;
+              height: 40px;
+              border: 1px solid #000;
+              border-radius: 3px;
+              background-color: #9EBFBF;
+              color: #FFFF00;
+              // align-items: center;
+            }
+
+            &__square {
+              // margin: 5px;
+              width: 40px;
+            }
+
+            &__rectangle {
+              width: 80px;
+            }
+
+            &__space {
+              width: 340px;
+              // background-color: gray;
+            }
+
+            .special-key {
+              background-color: #40A6A6;
+            }
+          }
+
+        }
+      }
+
+      .info {
+        text-align: center;
+        color: #40A6A6;
+        font-size: 22px;
+      }
+
+    }
+
+  }
+}

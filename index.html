@@ -7,7 +7,26 @@
   <link rel="stylesheet" href="./css/style.css">
   <title>virtual-keyboard</title>
 </head>
-<body>
+<body class="body">
+  <div class="container">
+    <header class="header">
+      <h1 class="header-title">RSS Виртуальная клавиатура</h1>
+    </header>
+    <main class="main">
+      <div class="keyboard">
+        <textarea class="keyboard-input" rows="5" cols="33"></textarea>
+        <div class="keyboard-keys">
+          <!-- <div class="keyboard-key__square key"></div>
+          <div class="keyboard-key__rectangle"></div> -->
+        </div>
+      </div>
+
+      <div class="info">
+        <p class="info__part1">Клавиатура создана в операционной системе Windows</p>
+        <p class="info__part2">Для переключения языка комбинация: левыe ctrl + alt</p>
+      </div>
+    </main>
+  </div>
   <script src="./script.js"></script>
 </body>
 </html>
