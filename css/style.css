@@ -62,6 +62,10 @@
 .body .container .main .keyboard .keyboard-keys .keyboard-row .special-key {
   background-color: #40A6A6;
 }
+.body .container .main .keyboard .keyboard-keys .keyboard-row .active {
+  background-color: red;
+  transition: all 0.7s;
+}
 .body .container .main .info {
   text-align: center;
   color: #40A6A6;

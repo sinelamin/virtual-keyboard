@@ -55,10 +55,11 @@
               color: #FFFF00;
             }
 
+            
             &__square {
               width: 40px;
             }
-
+            
             &__rectangle {
               width: 80px;
             }
@@ -66,9 +67,14 @@
             &__space {
               width: 340px;
             }
-
+            
             .special-key {
               background-color: #40A6A6;
+            }
+
+            .active {
+              background-color: red;
+              transition: all 0.7s;
             }
           }
         }
