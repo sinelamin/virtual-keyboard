@@ -71,13 +71,23 @@ rows.forEach(item => {
 });
 //
 
+function setLocalStorage() {
+  keyDown.forEach(item => {
+    if (item.classList.contains('eng_active')) {
+      localStorage.setItem('lang', 'eng_active');
+    } else {
+      localStorage.setItem('lang', 'rus_active');
+    }
+  });
+}
+window.addEventListener('beforeunload', setLocalStorage);
 
 
-addEventListener('keydown', e => {
-  keysArr.push(e.key);
-  console.log(keysArr);
+// addEventListener('keydown', e => {
+//   keysArr.push(e.key);
+//   console.log(keysArr);
 
-});
+// });
 
 
 // for (let key in rowKeys1) {
@@ -88,10 +98,10 @@ addEventListener('keydown', e => {
 
 // }
 
-function addСhar(rowKeys, keyCode, keyCap, keySimEnLow, keySimEnUp, keySimRusLow, keySimRusUp, keySimNumLow, keySimNumUp) {
+function addСhar(rowKeys, keyCode, keyCap, keySimEngLow, keySimEngUp, keySimRusLow, keySimRusUp, keySimNumLow, keySimNumUp) {
 
-  let arr1 = [keySimEnLow, keySimRusLow];
-  let arr2 = [keySimEnUp, keySimRusUp];
+  let arr1 = [keySimEngLow, keySimRusLow];
+  let arr2 = [keySimEngUp, keySimRusUp];
   let count = 0;
 
   if (Array.isArray(rowKeys[keyCode])) {
@@ -158,8 +168,8 @@ function addСhar(rowKeys, keyCode, keyCap, keySimEnLow, keySimEnUp, keySimRusLo
 
     keyCap.classList.add(`${keyCode}`);
 
-    keySimEnLow.innerHTML = rowKeys[keyCode];
-    keySimEnUp.innerHTML = rowKeys[keyCode];
+    keySimEngLow.innerHTML = rowKeys[keyCode];
+    keySimEngUp.innerHTML = rowKeys[keyCode];
     keySimRusLow.innerHTML = rowKeys[keyCode];
     keySimRusUp.innerHTML = rowKeys[keyCode];
   }
@@ -170,42 +180,42 @@ function keyCreate(rowKeys) {
   const row = document.createElement('div');
   for (let keyCode in rowKeys) {
     const keyCap = document.createElement('div');
-    const keySimEn = document.createElement('span');
+    const keySimEng = document.createElement('span');
     const keySimRus = document.createElement('span');
     const keySimNum = document.createElement('span');
-    const keySimEnLow = document.createElement('span');
-    const keySimEnUp = document.createElement('span');
+    const keySimEngLow = document.createElement('span');
+    const keySimEngUp = document.createElement('span');
     const keySimRusLow = document.createElement('span');
     const keySimRusUp = document.createElement('span');
     const keySimNumLow = document.createElement('span');
     const keySimNumUp = document.createElement('span');
 
     row.classList.add('keyboard-row');
-    keySimEn.classList.add('eng');
+    keySimEng.classList.add('eng');
     keySimRus.classList.add('rus');
     keySimNum.classList.add('num');
-    keySimEnLow.classList.add('low-case');
-    keySimEnUp.classList.add('up-case');
+    keySimEngLow.classList.add('low-case');
+    keySimEngUp.classList.add('up-case');
     keySimRusLow.classList.add('low-case');
     keySimRusUp.classList.add('up-case');
     keySimNumLow.classList.add('low-case');
     keySimNumUp.classList.add('up-case');
 
     row.append(keyCap);
-    keyCap.append(keySimEn);
+    keyCap.append(keySimEng);
     keyCap.append(keySimNum);
     keyCap.append(keySimRus);
-    keySimEn.append(keySimEnLow);
-    keySimEn.append(keySimEnUp);
+    keySimEng.append(keySimEngLow);
+    keySimEng.append(keySimEngUp);
     keySimNum.append(keySimNumLow);
     keySimNum.append(keySimNumUp);
     keySimRus.append(keySimRusLow);
     keySimRus.append(keySimRusUp);
 
-    addСhar(rowKeys, keyCode, keyCap, keySimEnLow, keySimEnUp, keySimRusLow, keySimRusUp, keySimNumLow, keySimNumUp);
+    addСhar(rowKeys, keyCode, keyCap, keySimEngLow, keySimEngUp, keySimRusLow, keySimRusUp, keySimNumLow, keySimNumUp);
 
     keyCap.classList.add(`${keyCode}`);
-    keySimEnUp.classList.add('hidden');
+    keySimEngUp.classList.add('hidden');
     keySimRusLow.classList.add('hidden');
     keySimRusUp.classList.add('hidden');
     keySimNumUp.classList.add('hidden');
@@ -217,42 +227,136 @@ function keyCreate(rowKeys) {
 
 
 const keyDown = document.querySelectorAll('.key');
+keyDown.forEach(item => {
+  item.classList.add('eng_active');
+});
 
 //Event key
 addEventListener('keydown', event => {
+  event.preventDefault();
   keyDown.forEach(item => {
     if (item.classList.contains(`${event.code}`)) {
       item.classList.add('active');
     }
 
     if (event.code == 'ShiftLeft' || event.code == 'ShiftRight') {
-      item.firstChild.firstChild.classList.add('hidden');
+      if (item.classList.contains('eng_active')) {
+        document.querySelectorAll('.eng').forEach(item => {
+          item.firstChild.classList.add('hidden');
+        });
+        document.querySelectorAll('.eng').forEach(item => {
+          item.lastChild.classList.remove('hidden');
+        });
+      }
+
+      if (item.classList.contains('rus_active')) {
+        document.querySelectorAll('.rus').forEach(item => {
+          item.firstChild.classList.add('hidden');
+        });
+        document.querySelectorAll('.rus').forEach(item => {
+          item.lastChild.classList.remove('hidden');
+        });
+      }
+
       item.childNodes[1].firstChild.classList.add('hidden');
-      item.firstChild.lastChild.classList.remove('hidden');
       item.childNodes[1].lastChild.classList.remove('hidden');
     }
   });
 });
 
+
 addEventListener('keyup', event => {
+  event.preventDefault();
   keyDown.forEach(item => {
     if (item.classList.contains(`${event.code}`)) {
       item.classList.remove('active');
     }
 
     if (event.code == 'ShiftLeft' || event.code == 'ShiftRight') {
-      item.firstChild.firstChild.classList.remove('hidden');
+      if (item.classList.contains('eng_active')) {
+        document.querySelectorAll('.eng').forEach(item => {
+          item.firstChild.classList.remove('hidden');
+        });
+        document.querySelectorAll('.eng').forEach(item => {
+          item.lastChild.classList.add('hidden');
+        });
+      }
+
+      if (item.classList.contains('rus_active')) {
+        document.querySelectorAll('.rus').forEach(item => {
+          item.firstChild.classList.remove('hidden');
+        });
+        document.querySelectorAll('.rus').forEach(item => {
+          item.lastChild.classList.add('hidden');
+        });
+      }
+
       item.childNodes[1].firstChild.classList.remove('hidden');
-      item.firstChild.lastChild.classList.add('hidden');
       item.childNodes[1].lastChild.classList.add('hidden');
     }
   });
 });
 //
 
+//Change Lang
+function runOnKeys(changeLang, ...codes) {
+  let shortcutKey = new Set();
+
+  document.addEventListener('keydown', event => {
+    shortcutKey.add(event.code);
+
+    for (let code of codes) {
+      if (!shortcutKey.has(code)) {
+        return;
+      }
+    }
+
+    shortcutKey.clear();
+
+    changeLang();
+  });
+
+  document.addEventListener('keyup', event => {
+    shortcutKey.delete(event.code);
+  });
+
+}
+
+function changeLang() {
+  keyDown.forEach(item => {
+    if (item.classList.contains('eng_active')) {
+      document.querySelectorAll('.eng').forEach(item => {
+        item.firstChild.classList.add('hidden');
+      });
+      document.querySelectorAll('.rus').forEach(item => {
+        item.firstChild.classList.remove('hidden');
+      });
+
+      item.classList.add('rus_active');
+      item.classList.remove('eng_active');
+      localStorage.setItem('lang', 'rus_active');
+    } else {
+      document.querySelectorAll('.rus').forEach(item => {
+        item.firstChild.classList.add('hidden');
+      });
+      document.querySelectorAll('.eng').forEach(item => {
+        item.firstChild.classList.remove('hidden');
+      });
+
+      item.classList.add('eng_active');
+      item.classList.remove('rus_active');
+      localStorage.setItem('lang', 'eng_active');
+    }
+  });
+}
+
+runOnKeys(changeLang, "ControlLeft", "AltLeft");
+//
+
 
 //Event mouse
 addEventListener('mousedown', event => {
+  event.preventDefault();
   keyDown.forEach(item => {
     if (item == event.target) {
       item.classList.add('active');
@@ -269,6 +373,7 @@ addEventListener('mousedown', event => {
 });
 
 addEventListener('mouseup', event => {
+  event.preventDefault();
   keyDown.forEach(item => {
     if (item == event.target) {
       item.classList.remove('active');
@@ -284,3 +389,35 @@ addEventListener('mouseup', event => {
 });
 //
 
+
+function getLocalStorage() {
+  keyDown.forEach(item => {
+    if (localStorage.getItem('lang') !== 'eng_active') {
+      document.querySelectorAll('.eng').forEach(item => {
+        item.firstChild.classList.add('hidden');
+      });
+      document.querySelectorAll('.rus').forEach(item => {
+        item.firstChild.classList.remove('hidden');
+      });
+
+      item.classList.add('rus_active');
+      item.classList.remove('eng_active');
+    } else {
+      document.querySelectorAll('.rus').forEach(item => {
+        item.firstChild.classList.add('hidden');
+      });
+      document.querySelectorAll('.eng').forEach(item => {
+        item.firstChild.classList.remove('hidden');
+      });
+  
+      item.classList.add('eng_active');
+      item.classList.remove('rus_active');
+    }
+
+  });
+}
+
+
+window.addEventListener('load', (event) => {
+  getLocalStorage();
+});
