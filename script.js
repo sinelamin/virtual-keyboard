@@ -8,6 +8,13 @@ const rowKeys3 = { CapsLock: 'CapsLock', KeyA: [['a', 'A'], ['ф', 'Ф']], KeyS:
 const rowKeys4 = { ShiftLeft: 'Shift', KeyZ: [['z', 'Z'], ['я', 'Я']], KeyX: [['x', 'X'], ['ч', 'Ч']], KeyC: [['c', 'C'], ['с', 'С']], KeyV: [['v', 'V'], ['м', 'М']], KeyB: [['b', 'B'], ['и', 'И']], KeyN: [['n', 'N'], ['т', 'Т']], KeyM: [['m', 'M'], ['ь', 'Ь']], Comma: [[',', '<'], ['б', 'Б']], Period: [['.', '>'], ['ю', 'Ю']], Slash: [['/', '?'], ['.', ',']], ArrowUp: '▲ ', ShiftRight: 'Shift' };
 const rowKeys5 = { ControlLeft: 'Ctrl', MetaLeft: 'Win', AltLeft: 'Alt', Space: '', AltRight: 'Alt', ArrowLeft: '◄ ', ArrowDown: '▼ ', ArrowRight: '► ', ControlRight: 'Ctrl' };
 
+const arrow = {
+  ArrowUp: '▲',
+  ArrowLeft: '◄',
+  ArrowDown: '▼',
+  ArrowRight: '►'
+};
+
 const rows = [rowKeys1, rowKeys2, rowKeys3, rowKeys4, rowKeys5];
 
 
@@ -124,7 +131,6 @@ function addСhar(rowKeys, keyCode, keyCap, keySimEngLow, keySimEngUp, keySimRus
       keySimNumUp.innerHTML = rowKeys[keyCode][1];
     } else {
 
-
       for (let x of rowKeys[keyCode]) {
 
         for (let i = 0; i < x.length; i += 1) {
@@ -227,9 +233,9 @@ function keyCreate(rowKeys) {
 
 
 const keyDown = document.querySelectorAll('.key');
-keyDown.forEach(item => {
-  item.classList.add('eng_active');
-});
+// keyDown.forEach(item => {
+//   item.classList.add('eng_active');
+// });
 
 //Event key
 addEventListener('keydown', event => {
@@ -297,6 +303,29 @@ addEventListener('keyup', event => {
   });
 });
 //
+
+addEventListener('keyup', event => {
+  event.preventDefault();
+  // keyDown.forEach(item => {
+  console.log(event.key);
+  if (event.key == 'Backspace') {
+    keysArr.pop(event.key);
+  } else if (event.key == 'Enter') {
+    keysArr.push('\n');
+  } else if (event.key == 'Tab') {
+    keysArr.push('    ');
+  } else if (event.key == 'Control' || event.key == 'Shift' || event.key == 'Alt' || event.key == 'CapsLock') {
+  } else if (event.key == 'ArrowUp' || event.key == 'ArrowLeft' || event.key == 'ArrowRight' || event.key == 'ArrowDown') {
+    for (let key in arrow) {
+      if (event.key == key) {
+        keysArr.push(arrow[key]);
+      }
+    }
+  } else {
+    keysArr.push(event.key);
+  }
+  document.querySelector('.keyboard-input').innerHTML = keysArr.join('');
+});
 
 //Change Lang
 function runOnKeys(changeLang, ...codes) {
@@ -409,7 +438,7 @@ function getLocalStorage() {
       document.querySelectorAll('.eng').forEach(item => {
         item.firstChild.classList.remove('hidden');
       });
-  
+
       item.classList.add('eng_active');
       item.classList.remove('rus_active');
     }
