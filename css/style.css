@@ -6,6 +6,7 @@
   max-width: 1000px;
 }
 .body .container .header-title {
+  margin-bottom: 10px;
   text-align: center;
   font-size: 32px;
   color: #40A6A6;
@@ -63,8 +64,15 @@
   background-color: #40A6A6;
 }
 .body .container .main .keyboard .keyboard-keys .keyboard-row .active {
+  background-color: black;
+  transition: all 0.7s;
+}
+.body .container .main .keyboard .keyboard-keys .keyboard-row .active-shift {
   background-color: red;
   transition: all 0.7s;
+}
+.body .container .main .keyboard .keyboard-keys .keyboard-row .hidden {
+  display: none;
 }
 .body .container .main .info {
   text-align: center;

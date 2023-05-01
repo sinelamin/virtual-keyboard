@@ -8,6 +8,7 @@
     // .header {}
 
     .header-title {
+      margin-bottom: 10px;
       text-align: center;
       font-size: 32px;
       color: #40A6A6;
@@ -73,8 +74,21 @@
             }
 
             .active {
+              background-color: black;
+              transition: all 0.7s;
+            }
+            .active-shift {
               background-color: red;
               transition: all 0.7s;
+            }
+            // .eng {}
+            // .rus {}
+            // .low-case {}
+            // .up-case {}
+            // .caps {}
+            // .shift {}
+            .hidden {
+              display: none;
             }
           }
         }
