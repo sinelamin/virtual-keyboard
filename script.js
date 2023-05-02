@@ -218,7 +218,6 @@ function keyCreate(rowKeys) {
 }
 
 
-
 const keyDown = document.querySelectorAll('.key');
 
 
@@ -301,10 +300,79 @@ addEventListener('keyup', event => {
 });
 //
 
+
+//Event mouse
+addEventListener('mousedown', event => {
+  event.preventDefault();
+  keyDown.forEach(item => {
+    if (item == event.target) {
+      item.classList.add('active');
+    }
+
+
+    if (item !== event.target && event.target.outerText == 'Shift') {
+      if (item.classList.contains('eng_active')) {
+        item.firstChild.firstChild.classList.add('hidden'); //low eng
+        item.firstChild.firstChild.classList.remove('show'); //low eng
+        item.firstChild.lastChild.classList.remove('hidden'); // up en
+        item.firstChild.lastChild.classList.add('show'); // up en
+      }
+
+      if (item.classList.contains('rus_active')) {
+        item.lastChild.firstChild.classList.add('hidden'); //low eng
+        item.lastChild.firstChild.classList.remove('show'); //low eng
+        item.lastChild.lastChild.classList.remove('hidden'); // up en
+        item.lastChild.lastChild.classList.add('show'); // up en
+      }
+
+      item.childNodes[1].firstChild.classList.add('hidden'); // num one
+      item.childNodes[1].firstChild.classList.remove('show'); // num one
+      item.childNodes[1].lastChild.classList.remove('hidden'); // num two
+      item.childNodes[1].lastChild.classList.add('show'); // num two
+
+    }
+  });
+});
+
+addEventListener('mouseup', event => {
+  event.preventDefault();
+  keyDown.forEach(item => {
+    if (item == event.target) {
+      item.classList.remove('active');
+    }
+
+    if (item !== event.target && event.target.outerText == 'Shift') {
+
+      if (item.classList.contains('eng_active')) {
+        item.firstChild.firstChild.classList.remove('hidden'); //low eng
+        item.firstChild.firstChild.classList.add('show'); //low eng
+        item.firstChild.lastChild.classList.add('hidden'); // up en
+        item.firstChild.lastChild.classList.remove('show'); // up en
+      }
+
+      if (item.classList.contains('rus_active')) {
+        item.lastChild.firstChild.classList.remove('hidden'); //low eng
+        item.lastChild.firstChild.classList.add('show'); //low eng
+        item.lastChild.lastChild.classList.add('hidden'); // up en
+        item.lastChild.lastChild.classList.remove('show'); // up en
+      }
+
+      item.childNodes[1].firstChild.classList.remove('hidden'); // num one
+      item.childNodes[1].firstChild.classList.add('show'); // num one
+      item.childNodes[1].lastChild.classList.add('hidden'); // num two
+      item.childNodes[1].lastChild.classList.remove('show'); // num two
+    }
+  });
+});
+//
+
+
+
 //Text input keyboard
 addEventListener('keydown', event => {
   event.preventDefault();
-  // console.log(event);
+  // console.log(event.code);
+  console.log(event.key);
 
   if (event.key == 'Backspace') {
     keysArr.pop(event.key);
@@ -328,23 +396,26 @@ addEventListener('keydown', event => {
 
 
 //Text input click mouse
-addEventListener('click', event => {
-
-  if (event.target.innerText == 'Backspace') {
-    keysArr.pop(event.target.innerText);
-  } else if (event.target.innerText == 'Enter') {
-    keysArr.push('\n');
-  } else if (event.target.innerText == '') {
-    keysArr.push(' ');
-  } else if (event.target.innerText == 'Tab') {
-    keysArr.push('    ');
-  } else if (event.target.innerText == 'Ctrl' || event.target.innerText == 'Shift' || event.target.innerText == 'Alt' || event.target.innerText == 'CapsLock' || event.target.innerText == 'Win' || event.target.innerText == 'Del') {
-
-  } else {
-    keysArr.push(event.target.innerText);
-  }
-
-  document.querySelector('.keyboard-input').innerHTML = keysArr.join('');
+document.querySelectorAll('.key').forEach(item => {
+  item.addEventListener('click', event => {
+    event.preventDefault();
+    if (event.target.innerText == 'Backspace') {
+      keysArr.pop(event.target.innerText);
+    } else if (event.target.innerText == 'Enter') {
+      keysArr.push('\n');
+    } else if (event.target.innerText == '') {
+      keysArr.push(' ');
+    } else if (event.target.innerText == 'Tab') {
+      keysArr.push('    ');
+    } else if (event.target.innerText == 'Ctrl' || event.target.innerText == 'Shift' || event.target.innerText == 'Alt' || event.target.innerText == 'CapsLock' || event.target.innerText == 'Win' || event.target.innerText == 'Del') {
+  
+    } else {
+      // console.log(event.target.innerText);
+      keysArr.push(event.target.innerText);
+    }
+  
+    document.querySelector('.keyboard-input').innerHTML = keysArr.join('');
+  });
 });
 //
 
@@ -406,84 +477,6 @@ function changeLang() {
 }
 
 runOnKeys(changeLang, "ControlLeft", "AltLeft");
-//
-
-
-//Event mouse
-addEventListener('mousedown', event => {
-  event.preventDefault();
-  keyDown.forEach(item => {
-    if (item == event.target) {
-      item.classList.add('active');
-    }
-
-
-    if (item !== event.target && event.target.outerText == 'Shift') {
-      if (item.classList.contains('eng_active')) {
-        item.firstChild.firstChild.classList.add('hidden'); //low eng
-        item.firstChild.firstChild.classList.remove('show'); //low eng
-        item.firstChild.lastChild.classList.remove('hidden'); // up en
-        item.firstChild.lastChild.classList.add('show'); // up en
-
-
-      }
-
-      if (item.classList.contains('rus_active')) {
-        item.lastChild.firstChild.classList.add('hidden'); //low eng
-        item.lastChild.firstChild.classList.remove('show'); //low eng
-        item.lastChild.lastChild.classList.remove('hidden'); // up en
-        item.lastChild.lastChild.classList.add('show'); // up en
-
-
-      }
-
-      item.childNodes[1].firstChild.classList.add('hidden'); // num one
-      item.childNodes[1].firstChild.classList.remove('show'); // num one
-      item.childNodes[1].lastChild.classList.remove('hidden'); // num two
-      item.childNodes[1].lastChild.classList.add('show'); // num two
-
-    }
-  });
-});
-
-addEventListener('mouseup', event => {
-  event.preventDefault();
-  keyDown.forEach(item => {
-    if (item == event.target) {
-      item.classList.remove('active');
-    }
-
-    if (item !== event.target && event.target.outerText == 'Shift') {
-      // item.firstChild.firstChild.classList.remove('hidden');
-      // item.childNodes[1].firstChild.classList.remove('hidden');
-      // item.firstChild.lastChild.classList.add('hidden');
-      // item.childNodes[1].lastChild.classList.add('hidden');
-
-      if (item.classList.contains('eng_active')) {
-        item.firstChild.firstChild.classList.remove('hidden'); //low eng
-        item.firstChild.firstChild.classList.add('show'); //low eng
-        item.firstChild.lastChild.classList.add('hidden'); // up en
-        item.firstChild.lastChild.classList.remove('show'); // up en
-
-
-      }
-
-      if (item.classList.contains('rus_active')) {
-        item.lastChild.firstChild.classList.remove('hidden'); //low eng
-        item.lastChild.firstChild.classList.add('show'); //low eng
-        item.lastChild.lastChild.classList.add('hidden'); // up en
-        item.lastChild.lastChild.classList.remove('show'); // up en
-
-
-      }
-
-      item.childNodes[1].firstChild.classList.remove('hidden'); // num one
-      item.childNodes[1].firstChild.classList.add('show'); // num one
-      item.childNodes[1].lastChild.classList.add('hidden'); // num two
-      item.childNodes[1].lastChild.classList.remove('show'); // num two
-    }
-  });
-});
 //
 
 
