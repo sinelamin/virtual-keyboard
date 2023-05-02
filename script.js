@@ -78,6 +78,7 @@ rows.forEach(item => {
 });
 //
 
+//Load LocalStorage
 function setLocalStorage() {
   keyDown.forEach(item => {
     if (item.classList.contains('eng_active')) {
@@ -88,22 +89,8 @@ function setLocalStorage() {
   });
 }
 window.addEventListener('beforeunload', setLocalStorage);
+//
 
-
-// addEventListener('keydown', e => {
-//   keysArr.push(e.key);
-//   console.log(keysArr);
-
-// });
-
-
-// for (let key in rowKeys1) {
-//   // console.log(Array.isArray(rowKeys1[key]));
-//   if (Array.isArray(rowKeys1[key])) {
-//     // console.log(rowKeys1[key].flat(2).length);
-//   }
-
-// }
 
 function addСhar(rowKeys, keyCode, keyCap, keySimEngLow, keySimEngUp, keySimRusLow, keySimRusUp, keySimNumLow, keySimNumUp) {
 
@@ -147,8 +134,6 @@ function addСhar(rowKeys, keyCode, keyCap, keySimEngLow, keySimEngUp, keySimRus
             keyCap.classList.add('special-key');
           }
         }
-
-        // console.log(x);
 
         arr1[count].innerHTML = x[0];
         arr2[count].innerHTML = x[1];
@@ -221,9 +206,11 @@ function keyCreate(rowKeys) {
     addСhar(rowKeys, keyCode, keyCap, keySimEngLow, keySimEngUp, keySimRusLow, keySimRusUp, keySimNumLow, keySimNumUp);
 
     keyCap.classList.add(`${keyCode}`);
+    keySimEngLow.classList.add('show');
     keySimEngUp.classList.add('hidden');
     keySimRusLow.classList.add('hidden');
     keySimRusUp.classList.add('hidden');
+    keySimNumLow.classList.add('show');
     keySimNumUp.classList.add('hidden');
   }
 
@@ -233,9 +220,7 @@ function keyCreate(rowKeys) {
 
 
 const keyDown = document.querySelectorAll('.key');
-// keyDown.forEach(item => {
-//   item.classList.add('eng_active');
-// });
+
 
 //Event key
 addEventListener('keydown', event => {
@@ -249,23 +234,29 @@ addEventListener('keydown', event => {
       if (item.classList.contains('eng_active')) {
         document.querySelectorAll('.eng').forEach(item => {
           item.firstChild.classList.add('hidden');
+          item.firstChild.classList.remove('show');
         });
         document.querySelectorAll('.eng').forEach(item => {
           item.lastChild.classList.remove('hidden');
+          item.lastChild.classList.add('show');
         });
       }
 
       if (item.classList.contains('rus_active')) {
         document.querySelectorAll('.rus').forEach(item => {
           item.firstChild.classList.add('hidden');
+          item.firstChild.classList.remove('show');
         });
         document.querySelectorAll('.rus').forEach(item => {
           item.lastChild.classList.remove('hidden');
+          item.lastChild.classList.add('show');
         });
       }
 
       item.childNodes[1].firstChild.classList.add('hidden');
+      item.childNodes[1].firstChild.classList.remove('show');
       item.childNodes[1].lastChild.classList.remove('hidden');
+      item.childNodes[1].lastChild.classList.add('show');
     }
   });
 });
@@ -282,39 +273,46 @@ addEventListener('keyup', event => {
       if (item.classList.contains('eng_active')) {
         document.querySelectorAll('.eng').forEach(item => {
           item.firstChild.classList.remove('hidden');
+          item.firstChild.classList.add('show');
         });
         document.querySelectorAll('.eng').forEach(item => {
           item.lastChild.classList.add('hidden');
+          item.lastChild.classList.remove('show');
         });
       }
 
       if (item.classList.contains('rus_active')) {
         document.querySelectorAll('.rus').forEach(item => {
           item.firstChild.classList.remove('hidden');
+          item.firstChild.classList.add('show');
         });
         document.querySelectorAll('.rus').forEach(item => {
           item.lastChild.classList.add('hidden');
+          item.lastChild.classList.remove('show');
         });
       }
 
       item.childNodes[1].firstChild.classList.remove('hidden');
+      item.childNodes[1].firstChild.classList.add('show');
       item.childNodes[1].lastChild.classList.add('hidden');
+      item.childNodes[1].lastChild.classList.remove('show');
     }
   });
 });
 //
 
-addEventListener('keyup', event => {
+//Text input keyboard
+addEventListener('keydown', event => {
   event.preventDefault();
-  // keyDown.forEach(item => {
-  console.log(event.key);
+  // console.log(event);
+
   if (event.key == 'Backspace') {
     keysArr.pop(event.key);
   } else if (event.key == 'Enter') {
     keysArr.push('\n');
   } else if (event.key == 'Tab') {
     keysArr.push('    ');
-  } else if (event.key == 'Control' || event.key == 'Shift' || event.key == 'Alt' || event.key == 'CapsLock') {
+  } else if (event.key == 'Control' || event.key == 'Shift' || event.key == 'Alt' || event.key == 'CapsLock' || event.key == 'AltGraph' || event.key == 'Delete') {
   } else if (event.key == 'ArrowUp' || event.key == 'ArrowLeft' || event.key == 'ArrowRight' || event.key == 'ArrowDown') {
     for (let key in arrow) {
       if (event.key == key) {
@@ -324,8 +322,32 @@ addEventListener('keyup', event => {
   } else {
     keysArr.push(event.key);
   }
+
   document.querySelector('.keyboard-input').innerHTML = keysArr.join('');
 });
+
+
+//Text input click mouse
+addEventListener('click', event => {
+
+  if (event.target.innerText == 'Backspace') {
+    keysArr.pop(event.target.innerText);
+  } else if (event.target.innerText == 'Enter') {
+    keysArr.push('\n');
+  } else if (event.target.innerText == '') {
+    keysArr.push(' ');
+  } else if (event.target.innerText == 'Tab') {
+    keysArr.push('    ');
+  } else if (event.target.innerText == 'Ctrl' || event.target.innerText == 'Shift' || event.target.innerText == 'Alt' || event.target.innerText == 'CapsLock' || event.target.innerText == 'Win' || event.target.innerText == 'Del') {
+
+  } else {
+    keysArr.push(event.target.innerText);
+  }
+
+  document.querySelector('.keyboard-input').innerHTML = keysArr.join('');
+});
+//
+
 
 //Change Lang
 function runOnKeys(changeLang, ...codes) {
@@ -356,9 +378,11 @@ function changeLang() {
     if (item.classList.contains('eng_active')) {
       document.querySelectorAll('.eng').forEach(item => {
         item.firstChild.classList.add('hidden');
+        item.firstChild.classList.remove('show');
       });
       document.querySelectorAll('.rus').forEach(item => {
         item.firstChild.classList.remove('hidden');
+        item.firstChild.classList.add('show');
       });
 
       item.classList.add('rus_active');
@@ -367,9 +391,11 @@ function changeLang() {
     } else {
       document.querySelectorAll('.rus').forEach(item => {
         item.firstChild.classList.add('hidden');
+        item.firstChild.classList.remove('show');
       });
       document.querySelectorAll('.eng').forEach(item => {
         item.firstChild.classList.remove('hidden');
+        item.firstChild.classList.add('show');
       });
 
       item.classList.add('eng_active');
@@ -393,10 +419,29 @@ addEventListener('mousedown', event => {
 
 
     if (item !== event.target && event.target.outerText == 'Shift') {
-      item.firstChild.firstChild.classList.add('hidden');
-      item.childNodes[1].firstChild.classList.add('hidden');
-      item.firstChild.lastChild.classList.remove('hidden');
-      item.childNodes[1].lastChild.classList.remove('hidden');
+      if (item.classList.contains('eng_active')) {
+        item.firstChild.firstChild.classList.add('hidden'); //low eng
+        item.firstChild.firstChild.classList.remove('show'); //low eng
+        item.firstChild.lastChild.classList.remove('hidden'); // up en
+        item.firstChild.lastChild.classList.add('show'); // up en
+
+
+      }
+
+      if (item.classList.contains('rus_active')) {
+        item.lastChild.firstChild.classList.add('hidden'); //low eng
+        item.lastChild.firstChild.classList.remove('show'); //low eng
+        item.lastChild.lastChild.classList.remove('hidden'); // up en
+        item.lastChild.lastChild.classList.add('show'); // up en
+
+
+      }
+
+      item.childNodes[1].firstChild.classList.add('hidden'); // num one
+      item.childNodes[1].firstChild.classList.remove('show'); // num one
+      item.childNodes[1].lastChild.classList.remove('hidden'); // num two
+      item.childNodes[1].lastChild.classList.add('show'); // num two
+
     }
   });
 });
@@ -409,24 +454,50 @@ addEventListener('mouseup', event => {
     }
 
     if (item !== event.target && event.target.outerText == 'Shift') {
-      item.firstChild.firstChild.classList.remove('hidden');
-      item.childNodes[1].firstChild.classList.remove('hidden');
-      item.firstChild.lastChild.classList.add('hidden');
-      item.childNodes[1].lastChild.classList.add('hidden');
+      // item.firstChild.firstChild.classList.remove('hidden');
+      // item.childNodes[1].firstChild.classList.remove('hidden');
+      // item.firstChild.lastChild.classList.add('hidden');
+      // item.childNodes[1].lastChild.classList.add('hidden');
+
+      if (item.classList.contains('eng_active')) {
+        item.firstChild.firstChild.classList.remove('hidden'); //low eng
+        item.firstChild.firstChild.classList.add('show'); //low eng
+        item.firstChild.lastChild.classList.add('hidden'); // up en
+        item.firstChild.lastChild.classList.remove('show'); // up en
+
+
+      }
+
+      if (item.classList.contains('rus_active')) {
+        item.lastChild.firstChild.classList.remove('hidden'); //low eng
+        item.lastChild.firstChild.classList.add('show'); //low eng
+        item.lastChild.lastChild.classList.add('hidden'); // up en
+        item.lastChild.lastChild.classList.remove('show'); // up en
+
+
+      }
+
+      item.childNodes[1].firstChild.classList.remove('hidden'); // num one
+      item.childNodes[1].firstChild.classList.add('show'); // num one
+      item.childNodes[1].lastChild.classList.add('hidden'); // num two
+      item.childNodes[1].lastChild.classList.remove('show'); // num two
     }
   });
 });
 //
 
 
+//LocalStorage
 function getLocalStorage() {
   keyDown.forEach(item => {
     if (localStorage.getItem('lang') !== 'eng_active') {
       document.querySelectorAll('.eng').forEach(item => {
         item.firstChild.classList.add('hidden');
+        item.firstChild.classList.remove('show');
       });
       document.querySelectorAll('.rus').forEach(item => {
         item.firstChild.classList.remove('hidden');
+        item.firstChild.classList.add('show');
       });
 
       item.classList.add('rus_active');
@@ -434,9 +505,11 @@ function getLocalStorage() {
     } else {
       document.querySelectorAll('.rus').forEach(item => {
         item.firstChild.classList.add('hidden');
+        item.firstChild.classList.remove('show');
       });
       document.querySelectorAll('.eng').forEach(item => {
         item.firstChild.classList.remove('hidden');
+        item.firstChild.classList.add('show');
       });
 
       item.classList.add('eng_active');
@@ -450,3 +523,4 @@ function getLocalStorage() {
 window.addEventListener('load', (event) => {
   getLocalStorage();
 });
+//
