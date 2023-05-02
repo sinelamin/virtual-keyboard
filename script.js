@@ -212,6 +212,13 @@ function keyCreate(rowKeys) {
     keySimRusUp.classList.add('hidden');
     keySimNumLow.classList.add('show');
     keySimNumUp.classList.add('hidden');
+
+    keySimEngLow.classList.add(`${keyCode}`);
+    keySimEngUp.classList.add(`${keyCode}`);
+    keySimRusLow.classList.add(`${keyCode}`);
+    keySimRusUp.classList.add(`${keyCode}`);
+    keySimNumLow.classList.add(`${keyCode}`);
+    keySimNumUp.classList.add(`${keyCode}`);
   }
 
   keyboardKeys.append(row);
@@ -371,13 +378,13 @@ addEventListener('mouseup', event => {
 //Text input keyboard
 addEventListener('keydown', event => {
   event.preventDefault();
-  // console.log(event.code);
-  console.log(event.key);
-
+  
   if (event.key == 'Backspace') {
     keysArr.pop(event.key);
   } else if (event.key == 'Enter') {
     keysArr.push('\n');
+  } else if (event.code == 'Space') {
+    keysArr.push(' ');
   } else if (event.key == 'Tab') {
     keysArr.push('    ');
   } else if (event.key == 'Control' || event.key == 'Shift' || event.key == 'Alt' || event.key == 'CapsLock' || event.key == 'AltGraph' || event.key == 'Delete') {
@@ -388,11 +395,17 @@ addEventListener('keydown', event => {
       }
     }
   } else {
-    keysArr.push(event.key);
+    document.querySelectorAll('.show').forEach(item => {
+      if (item.classList.contains(`${event.code}`)) {
+    keysArr.push(item.innerText);
+
+      }
+    });
   }
 
   document.querySelector('.keyboard-input').innerHTML = keysArr.join('');
 });
+//
 
 
 //Text input click mouse
