@@ -1,0 +1,92 @@
+.body {
+  background-color: #DEFFDE;
+}
+.body .container {
+  margin: 0 auto;
+  max-width: 1000px;
+}
+.body .container .header-title {
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 32px;
+  color: #40A6A6;
+}
+.body .container .main {
+  margin: 0 auto;
+}
+.body .container .main .keyboard {
+  margin: 0 auto;
+  max-width: 715px;
+}
+.body .container .main .keyboard .keyboard-input {
+  display: block;
+  margin: 0 auto 20px;
+  height: 250px;
+  width: 100%;
+  background-color: #DEFFFF;
+  border: 1px solid #40A6A6;
+}
+.body .container .main .keyboard .keyboard-keys {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 5px;
+  background-color: #DEFFFF;
+  border: 1px solid #40A6A6;
+  font-weight: 800;
+  font-size: 15px;
+}
+.body .container .main .keyboard .keyboard-keys .keyboard-row {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+.body .container .main .keyboard .keyboard-keys .keyboard-row .key {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  margin-left: 4px;
+  margin-bottom: 8px;
+  text-align: center;
+  line-height: 40px;
+  height: 40px;
+  border: 1px solid #000;
+  border-radius: 3px;
+  background-color: #9EBFBF;
+  color: #FFFF00;
+}
+.body .container .main .keyboard .keyboard-keys .keyboard-row .key:hover {
+  cursor: pointer;
+  background-color: rgba(158, 191, 191, 0.7411764706);
+  transition: all 0.3s;
+}
+.body .container .main .keyboard .keyboard-keys .keyboard-row__square {
+  width: 40px;
+}
+.body .container .main .keyboard .keyboard-keys .keyboard-row__rectangle {
+  width: 80px;
+}
+.body .container .main .keyboard .keyboard-keys .keyboard-row__space {
+  width: 340px;
+}
+.body .container .main .keyboard .keyboard-keys .keyboard-row .special-key {
+  background-color: #57a5a5;
+}
+.body .container .main .keyboard .keyboard-keys .keyboard-row .special-key:hover {
+  background-color: rgba(87, 165, 165, 0.7176470588);
+}
+.body .container .main .keyboard .keyboard-keys .keyboard-row .active {
+  background-color: black;
+  transition: all 0.3s;
+}
+.body .container .main .keyboard .keyboard-keys .keyboard-row .active:hover {
+  background-color: black;
+  transition: all 0.3s;
+}
+.body .container .main .keyboard .keyboard-keys .keyboard-row .hidden {
+  display: none;
+}
+.body .container .main .info {
+  text-align: center;
+  color: #40A6A6;
+  font-size: 22px;
+}/*# sourceMappingURL=style.css.map */
