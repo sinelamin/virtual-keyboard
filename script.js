@@ -311,11 +311,11 @@ addEventListener('keyup', event => {
 //Event mouse
 addEventListener('mousedown', event => {
   event.preventDefault();
+
   keyDown.forEach(item => {
     if (item == event.target) {
       item.classList.add('active');
     }
-
 
     if (item !== event.target && event.target.outerText == 'Shift') {
       if (item.classList.contains('eng_active')) {
@@ -374,11 +374,10 @@ addEventListener('mouseup', event => {
 //
 
 
-
 //Text input keyboard
 addEventListener('keydown', event => {
   event.preventDefault();
-  
+
   if (event.key == 'Backspace') {
     keysArr.pop(event.key);
   } else if (event.key == 'Enter') {
@@ -397,7 +396,7 @@ addEventListener('keydown', event => {
   } else {
     document.querySelectorAll('.show').forEach(item => {
       if (item.classList.contains(`${event.code}`)) {
-    keysArr.push(item.innerText);
+        keysArr.push(item.innerText);
 
       }
     });
@@ -421,12 +420,12 @@ document.querySelectorAll('.key').forEach(item => {
     } else if (event.target.innerText == 'Tab') {
       keysArr.push('    ');
     } else if (event.target.innerText == 'Ctrl' || event.target.innerText == 'Shift' || event.target.innerText == 'Alt' || event.target.innerText == 'CapsLock' || event.target.innerText == 'Win' || event.target.innerText == 'Del') {
-  
+
     } else {
       // console.log(event.target.innerText);
       keysArr.push(event.target.innerText);
     }
-  
+
     document.querySelector('.keyboard-input').innerHTML = keysArr.join('');
   });
 });

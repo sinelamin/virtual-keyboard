@@ -45,6 +45,7 @@
             width: 100%;
 
             .key {
+              user-select: none;
               margin-left: 4px;
               margin-bottom: 8px;
               text-align: center;
@@ -87,17 +88,17 @@
               background-color: black;
               transition: all 0.3s;
             }
-            .active-shift {
-              background-color: red;
-              transition: all 0.7s;
+
+            .active:hover {
+              background-color: black;
+              transition: all 0.3s;
             }
-            // .en {}
-            // .rus {}
-            // .num {}
-            // .low-case {}
-            // .up-case {}
-            // .caps {}
-            // .shift {}
+            
+            // .active-shift {
+            //   background-color: red;
+            //   transition: all 0.7s;
+            // }
+            
             .hidden {
               display: none;
             }

@@ -41,6 +41,9 @@
   width: 100%;
 }
 .body .container .main .keyboard .keyboard-keys .keyboard-row .key {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
   margin-left: 4px;
   margin-bottom: 8px;
   text-align: center;
@@ -75,9 +78,9 @@
   background-color: black;
   transition: all 0.3s;
 }
-.body .container .main .keyboard .keyboard-keys .keyboard-row .active-shift {
-  background-color: red;
-  transition: all 0.7s;
+.body .container .main .keyboard .keyboard-keys .keyboard-row .active:hover {
+  background-color: black;
+  transition: all 0.3s;
 }
 .body .container .main .keyboard .keyboard-keys .keyboard-row .hidden {
   display: none;
